@@ -5,7 +5,6 @@ import java.util.List;
 import com.emre.staffmanagement.Employee;
 import com.emre.staffmanagement.EmployeeManagementImplementationService;
 import com.emre.staffmanagement.EmployeeManagementWebService;
-import com.emre.staffmanagement.SystemUnavaliableException;
 import com.emre.staffmanagement.SystemUnavaliableException_Exception;
 
 public class WebServiceClientTest {
