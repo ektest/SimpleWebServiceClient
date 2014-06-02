@@ -7,6 +7,7 @@ import com.emre.staffmanagement.EmployeeManagementImplementationService;
 import com.emre.staffmanagement.EmployeeManagementWebService;
 import com.emre.staffmanagement.SystemUnavaliableException_Exception;
 
+// SOAP WebService
 public class WebServiceClientTest {
 
 	public static void main(String[] args) {
