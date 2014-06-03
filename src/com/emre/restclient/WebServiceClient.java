@@ -2,9 +2,7 @@ package com.emre.restclient;
 
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
-import com.emre.staffmanagement.Employee;
+import com.emre.restclient.Employee;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -46,8 +44,8 @@ public class WebServiceClient {
 		newEmployee.setSalary(1000000);
 
 		ClientResponse response = web.accept
-					(MediaType.APPLICATION_XML_TYPE).type
-		         		(MediaType.APPLICATION_XML).post
+					("application/xml").type
+		         		("application/xml").post
 		        		 	(ClientResponse.class, newEmployee);
 		
 		System.out.println("The response code was " + response.getStatus());
