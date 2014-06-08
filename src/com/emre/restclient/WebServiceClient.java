@@ -60,7 +60,7 @@ public class WebServiceClient {
 		web = client.resource("http://localhost:8080/webapp/webservice/employees/551");
 		response = web.delete(ClientResponse.class);
 		
-		if(response.getStatusInfo() == Status.NOT_FOUND)
+		if(response.getStatus() == 404)
 		{
 			System.out.println("Employee could not find!");
 		}
