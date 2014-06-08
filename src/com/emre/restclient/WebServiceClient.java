@@ -2,8 +2,6 @@ package com.emre.restclient;
 
 import java.util.List;
 
-import javax.ws.rs.core.Response.Status;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -15,16 +13,26 @@ public class WebServiceClient {
 		Client client = Client.create();
 		WebResource web = client.resource(
 							"http://localhost:8080/webapp/webservice/employees/51");
-		Employee emp = web.get(Employee.class);
+		Employee emp = web.accept
+				("application/xml").get
+						(Employee.class);
 		
 		System.out.println("Firstname: " + emp.getFirstName());
 		System.out.println("Surname: " + emp.getSurname());
 		System.out.println("Job Role: " + emp.getJobRole());
 		System.out.println("Salary: " + emp.getSalary());
 
+		String json = web.accept
+				("application/json").get
+						(String.class);
+		
+		System.out.println(json);
+		
 		web = client.resource(
 				"http://localhost:8080/webapp/webservice/employees/");
-		List<Employee> allEmployees = web.get(new GenericType<List<Employee>>(){});
+		List<Employee> allEmployees = web.accept
+						("application/xml").get
+								(new GenericType<List<Employee>>(){});
 
 		for (Employee next : allEmployees){
 			System.out.println("############");
@@ -33,6 +41,13 @@ public class WebServiceClient {
 			System.out.println("Job Role: " + next.getJobRole());
 			System.out.println("Salary: " + next.getSalary());
 		}
+
+		json = web.accept
+				("application/json").get
+						(String.class);
+		
+		System.out.println(json);
+
 		// create a new employee 
 		web = client.resource("http://localhost:8080/webapp/webservice/employees/");
 		
@@ -48,7 +63,7 @@ public class WebServiceClient {
 					("application/xml").type
 		         		("application/xml").post
 		        		 	(ClientResponse.class, newEmployee);
-		
+
 		System.out.println("The response code was " + response.getStatus());
 		
 		if (response.getStatus() == 200)
@@ -57,7 +72,7 @@ public class WebServiceClient {
 		}
 		
 		// Test delete
-		web = client.resource("http://localhost:8080/webapp/webservice/employees/551");
+		web = client.resource("http://localhost:8080/webapp/webservice/employees/705");
 		response = web.delete(ClientResponse.class);
 		
 		if(response.getStatus() == 404)
