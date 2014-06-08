@@ -2,7 +2,8 @@ package com.emre.restclient;
 
 import java.util.List;
 
-import com.emre.restclient.Employee;
+import javax.ws.rs.core.Response.Status;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -13,7 +14,7 @@ public class WebServiceClient {
 	public static void main(String[] args) {
 		Client client = Client.create();
 		WebResource web = client.resource(
-							"http://localhost:8080/webapp/webservice/employees/217");
+							"http://localhost:8080/webapp/webservice/employees/51");
 		Employee emp = web.get(Employee.class);
 		
 		System.out.println("Firstname: " + emp.getFirstName());
@@ -38,7 +39,7 @@ public class WebServiceClient {
 		//String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><employee><firstName>AJames</firstName><jobRole>Trainer</jobRole><salary>100000</salary><surname>B</surname></employee>";
 
 		Employee newEmployee = new Employee();
-		newEmployee.setFirstName("James");
+		newEmployee.setFirstName("James-B");
 		newEmployee.setSurname("Gosling");
 		newEmployee.setJobRole("Creator of Java");
 		newEmployee.setSalary(1000000);
@@ -53,6 +54,15 @@ public class WebServiceClient {
 		if (response.getStatus() == 200)
 		{
 			System.out.println(response.getEntity(Employee.class).getFirstName());
+		}
+		
+		// Test delete
+		web = client.resource("http://localhost:8080/webapp/webservice/employees/551");
+		response = web.delete(ClientResponse.class);
+		
+		if(response.getStatusInfo() == Status.NOT_FOUND)
+		{
+			System.out.println("Employee could not find!");
 		}
 	}
 }
